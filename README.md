@@ -12,30 +12,26 @@
 
 # Notcurses: blingful TUIs and character graphics
 
-**What it is**: a library facilitating complex TUIs on modern terminal
-emulators, supporting vivid colors, multimedia, threads, and Unicode to the
-maximum degree possible. [Things](https://www.youtube.com/watch?v=dcjkezf1ARY) can be done with
+**Что это такое**: библиотека, облегчающая создание сложных TUI на современных эмуляторах терминала, поддерживающая яркие цвета, мультимедиа, потоки и Unicode в максимально возможной степени. [Things](https://www.youtube.com/watch?v=dcjkezf1ARY) can be done with
 Notcurses that simply can't be done with NCURSES. It is furthermore
-fast as shit. **What it is not**: a source-compatible X/Open Curses implementation, nor a
-replacement for NCURSES on existing systems.
+fast as shit. **Что это не такое**: исполнение X/Open Curses, совместимое с исходным кодом, и не являющиеся
+заменой NCURSES в существующих системах.
 
 <p align="center">
 <a href="https://www.youtube.com/watch?v=dcjkezf1ARY"><img src="https://raw.githubusercontent.com/dankamongmen/notcurses/gh-pages/notcurses-logo.png" alt="setting the standard (hype video)"/></a>
 </p>
 
-for more information, see [dankwiki](https://nick-black.com/dankwiki/index.php/Notcurses)
-and the [man pages](https://notcurses.com). in addition, there is
-[Doxygen](https://notcurses.com/html/) output.
-i wrote a coherent [guidebook](https://nick-black.com/htp-notcurses.pdf), which is available for
-free download (or [paperback purchase](https://amazon.com/dp/B086PNVNC9)).
+для большей информации смотрите [dankwiki](https://nick-black.com/dankwiki/index.php/Notcurses)
+и [man страницы](https://notcurses.com). кроме того, есть
+[Doxygen](https://notcurses.com/html/) вывод.
+Я написал связное [руководство](https://nick-black.com/htp-notcurses.pdf), которое доступно для бесплатного скачивания (или для [покупки в бумажном варианте](https://amazon.com/dp/B086PNVNC9)).
 
-i've not yet added many documented examples, but [src/poc/](https://github.com/dankamongmen/notcurses/tree/master/src/poc)
-and [src/pocpp/](https://github.com/dankamongmen/notcurses/tree/master/src/pocpp)
-contain many small C and C++ programs respectively. `notcurses-demo` covers
-most of the functionality of Notcurses.
+я ещё не добавил много задокументированных примеров, но [src/poc/](https://github.com/dankamongmen/notcurses/tree/master/src/poc)
+и [src/pocpp/](https://github.com/dankamongmen/notcurses/tree/master/src/pocpp)
+содержат множество небольших программ на C и C++ соответственно. `notcurses-demo` охватывает большую часть функциональности Notcurses.
 
-**If you're running Notcurses applications in a Docker, please consult
-"[Environment notes](#environment-notes)" below.**
+**Если вы запускаете приложения Notcurses в Docker, ознакомьтесь с
+"[Примечания по окружению](#environment-notes)" ниже.**
 
 <a href="https://repology.org/project/notcurses/versions">
 <img src="https://repology.org/badge/vertical-allrepos/notcurses.svg" alt="Packaging status" align="right">
