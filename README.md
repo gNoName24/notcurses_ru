@@ -1,3 +1,5 @@
+Все переводы находятся в ветках, начинающиеся на `translate-`.
+
 # Notcurses: blingful TUIs and character graphics
 
 **What it is**: a library facilitating complex TUIs on modern terminal
