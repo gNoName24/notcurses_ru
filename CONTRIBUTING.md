@@ -1,3 +1,5 @@
+Напоминаю, что этот репозиторий является лишь форком.
+
 # Contributing to Notcurses
 
 Your quality contributions are cheerfully appreciated, however small. Example
