@@ -1,33 +1,33 @@
 Напоминаю, что этот репозиторий является лишь форком.
 
-# Contributing to Notcurses
+# Вклад в Notcurses
 
-Your quality contributions are cheerfully appreciated, however small. Example
-code and documentation are especially welcome.
+Ваши качественные вклады приветствуются с радостью, даже если они небольшие.
+Особенно приветствуются примеры кода и документация.
 
-Changes ought reflect the style of the surrounding matter, whether code or
-documentation. The styles used in the C core, the C++ wrappers, and the Rust
-wrappers are quite distinct; use the appropriate style for the language.
+Изменения должны отражать стиль окружающего материала, будь то код или
+документация. Стили, используемые в ядре C, C++ обёртках и Rust обёртках,
+сильно различны; используйте стиль, соответствующий языку.
 
-New features should have unit tests. It is appreciated if bugfixes have
-unit tests, as well. Wrappers in a new language absolutely must have at
-least some superficial tests (it is not necessary to deeply test the
-underlying functionality in each language). Adding a wrapper implies that
-you're prepared to maintain that wrapper; if you can't maintain it, the wrapper
-will likely be removed.
+Новые функции должны иметь модульные тесты. Будет приветствоваться,
+если исправления багов также будут иметь модульные тесты.
+Обёртки на новом языке обязательно должны иметь хотя бы поверхностные тесты
+(не обязательно глубоко проверять базовую функциональность на каждом языке).
+Добавление обёртки подразумевает, что вы готовы её поддерживать;
+если вы не можете поддерживать её, обёртка скорее всего будет удалена.
 
-Escape sequences available from terminfo must not be hard-coded. Routines must
-check to ensure the relevant escape sequence is valid for the current TERM
-definition, and not emit it if invalid. Routines emitting characters beyond
-the 128 elements of ASCII should check for UTF8 availability, and fall back to
-an ASCII equivalent if not present (or return an error).
+Последовательности управления, доступные через terminfo, не должны быть жёстко зафиксированы в коде.
+Функции должны проверять, что соответствующая последовательность управления
+допустима для текущего определения TERM, и не использовать её, если она недействительна.
+Функции, выводящие символы за пределами 128 элементов ASCII,
+должны проверять доступность UTF-8 и при её
+отсутствии использовать эквивалент в ASCII (или возвращать ошибку).
 
-Run `make test` with your changes, and ensure all tests pass. Run
-`notcurses-demo` as well, if your changes affect the core library (or the
-demo code).
+Запустите `make test` с вашими изменениями и убедитесь, что все тесты пройдены успешно.
+Также запустите `notcurses-demo`, если ваши изменения затрагивают ядро библиотеки (или код демо).
 
-## C standard
-Notcurses targets the ISO C17 standard. This means you should avoid using
-GNU C extensions as they might not work outside GCC/Clang. To verify your
-standard compliance on GCC and Clang you can compile with `-std=c17 -pedantic`
-command line arguments.
+## C стандарт
+Notcurses ориентирован на стандарт ISO C17. Это означает, что следует избегать использования
+расширений GNU C, так как они могут не работать вне GCC/Clang.
+Чтобы проверить соответствие стандарту в GCC и Clang, можно компилировать с
+аргументами командной строки `-std=c17 -pedantic`.
