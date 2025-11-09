@@ -131,6 +131,6 @@ Python обёртки также доступны на [PyPi](https://pypi.org/p
 * `USE_MULTIMEDIA`: `ffmpeg` для FFmpeg, `oiio` для OpenImageIO, `none` без мультимедиа (по умолчанию `ffmpeg`)
   * `oiio` не может использоваться при `USE_CXX=off`
 * `USE_PANDOC`: собирать man страницы с помощью pandoc (по умолчанию `on`)
-* `USE_POC`: build small, uninstalled proof-of-concept binaries (default `on`)
-* `USE_QRCODEGEN`: собирать поддержку qr-кодов через libqrcodegen (default `off`)
-* `USE_STATIC`: собирать статические библиотеки (в дополнение к shared) (default `on`)
+* `USE_POC`: собирать маленькие, неустанавливаемые proof-of-concept (проверка концепции) бинарники (по умолчанию `on`)
+* `USE_QRCODEGEN`: собирать поддержку qr-кодов через libqrcodegen (по умолчанию `off`)
+* `USE_STATIC`: собирать статические библиотеки (в дополнение к shared) (по умолчанию `on`)
