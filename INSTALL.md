@@ -1,109 +1,108 @@
-# Building and installation
+# Сборка и установка
 
-You are generally recommended to use your distro's package manager to install
-Notcurses; it is [available](https://repology.org/project/notcurses/versions)
-prepackaged on many distributions. If you wish to build from source, read on.
+Обычно рекомендуется использовать диспетчер пакетов вашего дистрибутива для установки
+Notcurses; он [доступен](https://repology.org/project/notcurses/versions)
+в виде готовых пакетов для многих дистрибутивов. Если вы хотите собрать из исходного кода, читайте дальше.
 
-## Prerequisites for building
+## Требования для сборки
 
-Acquire the current source via
+Получите текущий исходный код с помощью команды
 
 `git clone https://github.com/dankamongmen/notcurses.git`
 
-There are no submodules. Dependencies are fairly minimal.
+Подмодули отсутствуют. Зависимости довольно минимальны.
 
 ### APT
 
-Install build dependencies:
+Установите зависимости сборки:
 
 `apt-get install build-essential cmake doctest-dev libavdevice-dev libdeflate-dev libgpm-dev libncurses-dev libqrcodegen-dev libswscale-dev libunistring-dev pandoc pkg-config`
 
-If you only intend to build core Notcurses (without multimedia support), you
-can omit `libavdevice-dev` from this list. `zlib1g-dev` can be substituted for
-`libdeflate-dev`; build with `-DUSE_DEFLATE=off` in this case. If you don't
-want to generate QR codes, you can omit 'libqrcodegen-dev'.
+Если вы хотите создать только ядро Notcurses (без поддержки мультимедиа), вы
+можете убрать `libavdevice-dev` из этого списка. `zlib1g-dev` можно использовать вместо
+`libdeflate-dev`; в этом случае сборку следует выполнять с опцией `-DUSE_DEFLATE=off`.
+Если вы не планируете генерировать QR-коды, можно убрать 'libqrcodegen-dev'.
 
-If you want to build the Python wrappers, you'll also need:
+Если вы хотите собрать обёртки для Python, вам также понадобятся:
 
 `apt-get install python3-cffi python3-dev python3-pypandoc python3-setuptools`
 
 ### RPM
 
-Install build dependencies:
+Установите зависимости сборки:
 
 `dnf install cmake doctest-devel libdeflate-devel ncurses-devel gpm-devel libqrcodegen-devel libunistring-devel OpenImageIO-devel pandoc`
 
-If you only intend to build core Notcurses (without multimedia support), you
-can omit `OpenImageIO-devel`. If you're building outside Fedora Core (e.g. with
-RPM Fusion), you might want to use FFmpeg rather than OpenImageIO. If you don't
-want to generate QR codes, you can omit 'libqrcodegen-devel'. `zlib-devel` can
-substitute for `libdeflate-devel`; build with `-DUSE_DEFLATE=off` in this case.
+Если вы хотите создать только ядро Notcurses (без поддержки мультимедиа), вы
+можете убрать `OpenImageIO-devel`. Если вы собираете вне Fedora Core (например, с RPM Fusion),
+возможно, стоит использовать FFmpeg вместо OpenImageIO. Если вы не планируете генерировать
+QR-коды, можно убрать 'libqrcodegen-devel'. `zlib-devel` можно использовать вместо
+`libdeflate-devel`; в этом случае сборку следует выполнять с опцией `-DUSE_DEFLATE=off`.
 
 ### FreeBSD / DragonFly BSD
 
-Install build dependencies:
+Установите зависимости сборки:
 
 `pkg install archivers/libdeflate devel/ncurses multimedia/ffmpeg graphics/qr-code-generator devel/libunistring`
 
-If you only intend to build core Notcurses (without multimedia support), you
-can omit `multimedia/ffmpeg`. If you do not want to deflate Kitty graphics,
-you can omit 'archivers/libdeflate'; build with `-DUSE_DEFLATE=off` in this
-case. If you don't want to generate QR codes, you can omit
-'graphics/qr-code-generator'.
+Если вы хотите создать только ядро Notcurses (без поддержки мультимедиа), вы
+можете убрать `multimedia/ffmpeg`. Если вы не хотите сжимать графику Kitty,
+можно убрать 'archivers/libdeflate'; в этом случае сборку следует выполнять с опцией `-DUSE_DEFLATE=off`.
+Если вы не планируете генерировать QR-коды, можно убрать 'graphics/qr-code-generator'.
 
 ### Microsoft Windows
 
-Building on Windows requires [MSYS2](https://www.msys2.org/) in its
-64-bit Universal C Runtime (UCRT) incarnation. This builds native Windows DLLs
-and EXEs, though it does not use Visual Studio. Install build dependencies:
+Сборка в Windows требует [MSYS2](https://www.msys2.org/) в его 64-битной версии
+Universal C Runtime (UCRT). Это позволяет создавать нативные DLL и EXE для Windows,
+хотя и не использует Visual Studio. Установите зависимости сборки:
 
 `pacman -S mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-libdeflate mingw-w64-ucrt-x86_64-libunistring mingw-w64-ucrt-x86_64-ncurses mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-openimageio mingw-w64-ucrt-x86_64-toolchain`
 
-Note that on Windows, OpenImageIO is (at the moment) recommended over FFmpeg.
+Обратите внимание, что в Windows (на данный момент) рекомендуется использовать OpenImageIO, а не FFmpeg.
 
-If you only intend to build core Notcurses (without multimedia support), you
-can omit `mingw-w64-ucrt-x86_64-openimageio`. If you do not want to deflate Kitty
-graphics, you can omit 'mingw-w64-ucrt-x86_64-libdeflate'; build with
-`-DUSE_DEFLATE=off` in this case.
+Если вы хотите создать только ядро Notcurses (без поддержки мультимедиа), вы
+можете убрать `mingw-w64-ucrt-x86_64-openimageio`. Если вы не хотите сжимать графику Kitty,
+можно убрать 'mingw-w64-ucrt-x86_64-libdeflate'; в этом случае сборку следует выполнять с опцией
+`-DUSE_DEFLATE=off`.
 
-You'll want to add `-DUSE_DOCTEST=off -DUSE_PANDOC=off` to your `cmake` invocation.
-`notcurses-tester` does not currently work on Windows, and you probably don't want
-to build the UNIX-style documentation.
+Следует добавить `-DUSE_DOCTEST=off -DUSE_PANDOC=off` к `cmake`.
+`notcurses-tester` в данный момент не работает на Windows, и, вероятно,
+вы не захотите собирать документацию в стиле UNIX.
 
-## Building
+## Сборка
 
-* Create a subdirectory, traditionally `build` (this is not strictly necessary,
-  but it keeps your source tree clean). Enter the directory.
+* Создайте подкаталог, традиционно называемый `build` (это не обязательно,
+  но позволяет держать дерево исходников чистым). Перейдите в этот каталог.
 * `cmake ..`
-  * You might want to set e.g. `CMAKE_BUILD_TYPE`. Use `-DVAR=val`.
-  * To build without multimedia support, use `-DUSE_MULTIMEDIA=none`.
+  * Вы можете установить, например, `CMAKE_BUILD_TYPE`. Используйте `-DVAR=val`.
+  * Чтобы собрать без поддержки мультимедиа, используйте `-DUSE_MULTIMEDIA=none`.
 * `make`
 * `make test`
 * `make install`
 * `sudo ldconfig`
 
-The default multimedia engine is FFmpeg. You can select a different engine
-using `USE_MULTIMEDIA`. Valid values are `ffmpeg`, `oiio` (for OpenImageIO),
-or `none`. Without a multimedia engine, Notcurses will be unable to decode
-images and videos.
+По умолчанию мультимедийным движком является FFmpeg. Вы можете выбрать другой движок
+с помощью `USE_MULTIMEDIA`. Допустимые значения: `ffmpeg`, `oiio` (для OpenImageIO),
+или `none`. Без мультимедийного движка Notcurses не сможет декодировать
+изображения и видео.
 
-To get mouse events in the Linux console, you'll need the GPM daemon running,
-and you'll need run `cmake` with `-DUSE_GPM=on`.
+Чтобы получить события мыши в консоли Linux, вам понадобится запущенный демон GPM,
+и вам нужно будет запустить `cmake` c `-DUSE_GPM=on`.
 
-Run unit tests with `make test` following a successful build. If you have unit
-test failures, *please* file a bug including the output of
+Запустите модульные тесты с помощью `make test` после успешной сборки. Если какие-либо тесты
+не проходят, *пожалуйста*, сообщите об ошибке, приложив вывод команды
 
 `./notcurses-tester -p ../data`
 
-(`make test` also runs `notcurses-tester`, but hides important output).
+(`make test` также запускает `notcurses-tester`, но скрывает важный вывод).
 
-To watch the bitchin' demo, run `make demo` (or `./notcurses-demo -p ../data`).
-More details can be found on the `notcurses-demo(1)` man page.
+Чтобы посмотреть крутую демонстрацию, запустите `make demo` (или `./notcurses-demo -p ../data`).
+Более подробную информацию можно найти на man странице `notcurses-demo(1)`.
 
-Install with `make install` following a successful build. This installs the C
-core library, the C headers, the C++ library, and the C++ headers (note that
-the C headers are C++-safe). It does not install the Python wrappers. To
-install the Python wrappers (after installing the core library), run:
+Установите с помощью `make install` после успешной сборки. Это установит ядро C
+библиотеки, заголовочные файлы C, C++ библиотеку и заголовочные файлы C++ (обратите внимание,
+что заголовочные файлы на C безопасны для C++). Python-обёртки при этом не устанавливаются. Чтобы
+установить Python-обёртки (после установки ядра библиотеки), выполните:
 
 ```
 cd cffi
@@ -111,27 +110,27 @@ python setup.py build
 python setup.py install
 ```
 
-The Python wrappers are also available from [PyPi](https://pypi.org/project/notcurses/).
+Python обёртки также доступны на [PyPi](https://pypi.org/project/notcurses/).
 
-### Build options
+### Параметры сборки
 
-To set the C compiler, export `CC`. To set the C++ compiler, export `CXX`. The
-`CMAKE_BUILD_TYPE` CMake variable can be defined to any of its standard values,
-but must be `Debug` for use of `USE_COVERAGE`.
+Чтобы задать компилятор C, экспортируйте `CC`. Чтобы задать компилятор C++, экспортируйте `CXX`.
+Переменная CMake `CMAKE_BUILD_TYPE` CMake может быть установлена в любое из стандартных значений,
+но для использования `USE_COVERAGE` она должна быть `Debug`.
 
-* `DFSG_BUILD`: leave out all content considered non-free under the Debian Free Software Guidelines (default `off`)
-* `BUILD_TESTING`: build test targets (default `on`)
-* `BUILD_EXECUTABLES`: build executables (in addition to libs) (default `on`)
-* `BUILD_FFI_LIBRARY`: Build ffi library (containing all symbols which are static inline) (default `on`)
-* `USE_ASAN`: build with AddressSanitizer (default `off`)
-* `USE_CXX`: build C++ code (requires a C++ compiler) (default `on`)
-* `USE_COVERAGE`: build coverage support (for developers, requires use of Clang) (default `off`)
-* `USE_DOCTEST`: build `notcurses-tester` with Doctest, requires `BUILD_TESTING` and `USE_CXX` (default `on`)
-* `USE_DOXYGEN`: build interlinked HTML documentation with Doxygen (default `off`)
-* `USE_GPM`: build GPM console mouse support via libgpm (default `off`)
-* `USE_MULTIMEDIA`: `ffmpeg` for FFmpeg, `oiio` for OpenImageIO, `none` for none (default `ffmpeg`)
-  * `oiio` cannot be used with `USE_CXX=off`
-* `USE_PANDOC`: build man pages with pandoc (default `on`)
+* `DFSG_BUILD`: исключить весь контент, считающийся несвободным по Debian Free Software Guidelines (по умолчанию `off`)
+* `BUILD_TESTING`: собирать тестовые цели (по умолчанию `on`)
+* `BUILD_EXECUTABLES`: собирать исполняемые файлы (в дополнение к библиотекам) (по умолчанию `on`)
+* `BUILD_FFI_LIBRARY`: собирать ffi библиотеку (содержащую все символы, объявленные как static inline) (по умолчанию `on`)
+* `USE_ASAN`: сборка с AddressSanitizer (по умолчанию `off`)
+* `USE_CXX`: собирать C++ код (требует C++ компилятор) (по умолчанию `on`)
+* `USE_COVERAGE`: собирать поддержку coverage (разработчиков, требует использования Clang) (по умолчанию `off`)
+* `USE_DOCTEST`: собирать `notcurses-tester` с Doctest, требует `BUILD_TESTING` и `USE_CXX` (по умолчанию `on`)
+* `USE_DOXYGEN`: собирать взаимосвязанную HTML документацию с помощью Doxygen (по умолчанию `off`)
+* `USE_GPM`: собирать поддержку мыши в консоли GPM через libgpm (по умолчанию `off`)
+* `USE_MULTIMEDIA`: `ffmpeg` для FFmpeg, `oiio` для OpenImageIO, `none` без мультимедиа (по умолчанию `ffmpeg`)
+  * `oiio` не может использоваться при `USE_CXX=off`
+* `USE_PANDOC`: собирать man страницы с помощью pandoc (по умолчанию `on`)
 * `USE_POC`: build small, uninstalled proof-of-concept binaries (default `on`)
 * `USE_QRCODEGEN`: build qrcode support via libqrcodegen (default `off`)
 * `USE_STATIC`: build static libraries (in addition to shared ones) (default `on`)
