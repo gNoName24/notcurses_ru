@@ -132,5 +132,5 @@ Python обёртки также доступны на [PyPi](https://pypi.org/p
   * `oiio` не может использоваться при `USE_CXX=off`
 * `USE_PANDOC`: собирать man страницы с помощью pandoc (по умолчанию `on`)
 * `USE_POC`: build small, uninstalled proof-of-concept binaries (default `on`)
-* `USE_QRCODEGEN`: build qrcode support via libqrcodegen (default `off`)
-* `USE_STATIC`: build static libraries (in addition to shared ones) (default `on`)
+* `USE_QRCODEGEN`: собирать поддержку qr-кодов через libqrcodegen (default `off`)
+* `USE_STATIC`: собирать статические библиотеки (в дополнение к shared) (default `on`)
