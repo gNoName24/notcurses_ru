@@ -10,11 +10,11 @@
 
 Что насчет машинного перевода? Используется ли он тут? - Он тут используется, но старается быть лишь иструментом для фундаментального перевода, который в дальнейшем корректируется реальными людьми.
 
-# Notcurses: blingful TUIs and character graphics
+# Notcurses: блестящие TUI и символьная графика
 
-**Что это такое**: библиотека, облегчающая создание сложных TUI на современных эмуляторах терминала, поддерживающая яркие цвета, мультимедиа, потоки и Unicode в максимально возможной степени. [Things](https://www.youtube.com/watch?v=dcjkezf1ARY) can be done with
-Notcurses that simply can't be done with NCURSES. It is furthermore
-fast as shit. **Что это не такое**: исполнение X/Open Curses, совместимое с исходным кодом, и не являющиеся
+**Что это такое**: библиотека, облегчающая создание сложных TUI на современных эмуляторах терминала, поддерживающая яркие цвета, мультимедиа, потоки и Unicode в максимально возможной степени. С помощью Notcurses можно делать [вещи](https://www.youtube.com/watch?v=dcjkezf1ARY),
+которые просто невозможно реализовать с помощью NCURSES. К тому же, он ахуенно быстрый.
+**Что это не такое**: исполнение X/Open Curses, совместимое с исходным кодом, и не являющиеся
 заменой NCURSES в существующих системах.
 
 <p align="center">
@@ -52,111 +52,109 @@ fast as shit. **Что это не такое**: исполнение X/Open Cur
 [![Matrix](https://img.shields.io/matrix/notcursesdev:matrix.org?label=matrixchat)](https://app.element.io/#/room/#notcursesdev:matrix.org)
 [![Sponsor](https://img.shields.io/badge/-Sponsor-red?logo=github)](https://github.com/sponsors/dankamongmen)
 
-## Introduction
+## Введение
 
-Notcurses abandons the X/Open Curses API bundled as part of the Single UNIX
-Specification. For some necessary background, consult Thomas E. Dickey's
-superb and authoritative [NCURSES FAQ](https://invisible-island.net/ncurses/ncurses.faq.html#xterm_16MegaColors).
-As such, Notcurses is not a drop-in Curses replacement.
+Notcurses отказывается от использования X/Open Curses API, входящего в состав спецификации Single UNIX.
+Для получения необходимого фона обратитесь к превосходному и авторитетному [ЧаВо NCURSES](https://invisible-island.net/ncurses/ncurses.faq.html#xterm_16MegaColors).
+Таким образом, Notcurses не является прямой заменой Curses.
 
-Wherever possible, Notcurses makes use of the Terminfo library shipped with
-NCURSES, benefiting greatly from its portability and thoroughness.
+Везде, где это возможно, Notcurses использует библиотеку Terminfo,
+поставляемую с NCURSES, извлекая значительную пользу из её переносимости и тщательности.
 
-Notcurses opens up advanced functionality for the interactive user on
-workstations, phones, laptops, and tablets, possibly at the expense of e.g.
-some industrial and retail terminals. Fundamentally, Curses assumes the minimum
-and allows you (with effort) to step up, whereas Notcurses assumes the maximum
-and steps down (by itself) when necessary. The latter approach probably breaks
-on some older hardware, but the former approach results in new software looking
-like old hardware.
+Notcurses открывает расширенные возможности для интерактивного пользователя
+на рабочих станциях, телефонах, ноутбуках и планшетах, возможно, ценой того,
+что на некоторых промышленных и розничных терминалах это будет работать хуже.
+По сути, Curses предполагает минимум и позволяет вам (с усилиями) повышать возможности,
+тогда как Notcurses предполагает максимум и понижает уровень (самостоятельно) при необходимости.
+Последний подход, вероятно, не сработает на старом оборудовании,
+тогда как первый приводит к тому, что новое программное обеспечение выглядит как старое оборудование.
 
-Why use this non-standard library?
+Зачем использовать эту нестандартную библиотеку?
 
-* Thread safety, and efficient use in parallel programs, has been a design
-  consideration from the beginning.
+* Потокобезопасность и эффективное использование в параллельных программах,
+  с самого начала были одним из факторов, учитываемых при разработке.
 
-* A more orderly surface than that codified by X/Open: Exported identifiers are
-  prefixed to avoid common namespace collisions. Where reasonable,
-  `static inline` header-only code is used. This facilitates compiler
-  optimizations, and reduces loader time. Notcurses can be built without its
-  multimedia functionality, requiring a significantly lesser set of dependencies.
+* Более упорядоченная поверхность, чем та, которая кодифицирована X/Open: экспортируемые идентификаторы
+  имеют префиксы, чтобы избежать распространённых конфликтов имён.
+  Так, где это разумно, используется код `static inline` только в заголовках.
+  Это облегчает оптимизацию компилятором и сокращает время загрузки. Notcurses можно скомпилировать без
+  мультимедийного функционала, что требует значительно меньшего набора зависимостей.
 
-* All APIs natively support the Universal Character Set (Unicode). The `nccell`
-  API is based around Unicode's [Extended Grapheme Cluster](https://unicode.org/reports/tr29/) concept.
+* Все APIs изначально поддерживают Универсальный набор символов (Unicode / Юникод). API `nccell`
+  основан на концепции [Расширенных графемных кластеров](https://unicode.org/reports/tr29/) Юникода.
 
-* Visual features including images, fonts, video, high-contrast text, sprites,
-  and transparent regions. All APIs natively support 24-bit color, quantized
-  down as necessary for the terminal.
+* Визуальные преимущества, включая изображения, шрифты, видео, высококонтрастный текст, спрайты
+  и прозрачные области. Все API изначально поддерживают 24-bit цвет, квантованный
+  в соответствии с требованиями терминала.
 
-* Portable support for bitmapped graphics, using Sixel, Kitty,
-  and even the Linux framebuffer console.
+* Портируемая поддержка растровой графики с использованием Sixel, Kitty
+  и даже консоли Linux framebuffer.
 
-* Support for unambiguous [keyboard protocols](https://sw.kovidgoyal.net/kitty/keyboard-protocol/).
+* Поддержка однозначных [протоколов клавиатуры](https://sw.kovidgoyal.net/kitty/keyboard-protocol/).
 
-* "TUI mode" facilitates high-performance, non-scrolling, full-screen
-  applications. "CLI mode" supports scrolling output for shell utilities,
-  but with the full power of Notcurses.
+* "TUI режим" обеспечивает высокую производительность, отсутствие прокрутки и полноэкранные
+  приложения. "CLI режим" поддерживает прокрутку вывода для утилит оболочки,
+  но с полной мощью Notcurses.
 
-* It's Apache2-licensed in its entirety, as opposed to the
-  [drama in several acts](https://invisible-island.net/ncurses/ncurses-license.html)
-  that is the NCURSES license (the latter is [summarized](https://invisible-island.net/ncurses/ncurses-license.html#issues_freer)
-  as "a restatement of MIT-X11").
+* Он полностью лицензирован по Apache2, в отличие от
+  [драмы в нескольких актах](https://invisible-island.net/ncurses/ncurses-license.html)
+  которой является лицензия NCURSES (последняя [резюмируется](https://invisible-island.net/ncurses/ncurses-license.html#issues_freer)
+  как "переформулировка MIT-X11").
 
-Much of the above can be had with NCURSES, but they're not what NCURSES was
-*designed* for. On the other hand, if you're targeting industrial or critical
-applications, or wish to benefit from time-tested reliability and
-portability, you should by all means use that fine library.
+Большую часть из вышеперечисленного можно получить с помощью NCURSES,
+но это не то, для чего NCURSES *проектировалась*. С другой стороны, если вы ориентируетесь на промышленные или критически важные
+приложения или хотите воспользоваться проверенной временем надежностью и
+переносимостью, вам обязательно следует использовать эту замечательную библиотеку.
 
-## Requirements
+## Требования
 
-Minimum versions generally indicate the oldest version I've tested with; it
-may well be possible to use still older versions. Let me know of any successes!
+Минимальные версии обычно указывают на самые старые версии, с которыми я проводил тестирование;
+вполне возможно, что можно использовать и более старые версии. Сообщайте мне о любых успехах!
 
-* (build) CMake 3.21.0+ and a C17 compiler
-* (OPTIONAL) (OpenImageIO, testing, C++ bindings): A C++17 compiler
-* (build+runtime) From [NCURSES](https://invisible-island.net/ncurses/announce.html): terminfo 6.1+
-* (build+runtime) GNU [libunistring](https://www.gnu.org/software/libunistring/) 0.9.10+
-* (OPTIONAL) (build+runtime) [libgpm](https://www.nico.schottelius.org/software/gpm/) 1.20+
-* (OPTIONAL) (build+runtime) From QR-Code-generator: [libqrcodegen](https://github.com/nayuki/QR-Code-generator) 1.5.0+
-* (OPTIONAL) (build+runtime) From [FFmpeg](https://www.ffmpeg.org/): libswscale 5.0+, libavformat 57.0+, libavutil 56.0+, libavdevice 57.0+
-* (OPTIONAL) (build+runtime) [OpenImageIO](https://github.com/OpenImageIO/oiio) 2.15.0+, requires C++
-* (OPTIONAL) (testing) [Doctest](https://github.com/onqtam/doctest) 2.3.5+
-* (OPTIONAL) (documentation) [pandoc](https://pandoc.org/index.html) 1.19.2+
-* (OPTIONAL) (python bindings): Python 3.7+, [CFFI](https://pypi.org/project/cffi/) 1.13.2+, [pypandoc](https://pypi.org/project/pypandoc/) 1.5+
-* (runtime) Linux 2.6+, FreeBSD 11+, DragonFly BSD 5.9+, Windows 10 v1093+, or macOS 11.4+
+* (сборка) CMake 3.21.0+ и C17 compiler
+* (ОПЦИОНАЛЬНО) (OpenImageIO, testing, привязки C++): C++17 compiler
+* (сборка+рантайм) Из [NCURSES](https://invisible-island.net/ncurses/announce.html): terminfo 6.1+
+* (сборка+рантайм) GNU [libunistring](https://www.gnu.org/software/libunistring/) 0.9.10+
+* (ОПЦИОНАЛЬНО) (сборка+рантайм) [libgpm](https://www.nico.schottelius.org/software/gpm/) 1.20+
+* (ОПЦИОНАЛЬНО) (сборка+рантайм) Из QR-Code-generator: [libqrcodegen](https://github.com/nayuki/QR-Code-generator) 1.5.0+
+* (ОПЦИОНАЛЬНО) (сборка+рантайм) Из [FFmpeg](https://www.ffmpeg.org/): libswscale 5.0+, libavformat 57.0+, libavutil 56.0+, libavdevice 57.0+
+* (ОПЦИОНАЛЬНО) (сборка+рантайм) [OpenImageIO](https://github.com/OpenImageIO/oiio) 2.15.0+, требует C++
+* (ОПЦИОНАЛЬНО) (тестирование) [Doctest](https://github.com/onqtam/doctest) 2.3.5+
+* (ОПЦИОНАЛЬНО) (документация) [pandoc](https://pandoc.org/index.html) 1.19.2+
+* (ОПЦИОНАЛЬНО) (привязки python): Python 3.7+, [CFFI](https://pypi.org/project/cffi/) 1.13.2+, [pypandoc](https://pypi.org/project/pypandoc/) 1.5+
+* (рантайм) Linux 2.6+, FreeBSD 11+, DragonFly BSD 5.9+, Windows 10 v1093+, или macOS 11.4+
 
-More information on building and installation is available in [INSTALL.md](INSTALL.md).
+Более подробная информация о сборке и установке доступна в [INSTALL.md](INSTALL.md).
 
-### Wrappers
+### Обёртки
 
-If you wish to use a language other than C to work with Notcurses, numerous
-wrappers are available. Several are included in this repository, while
-others are external.
+Если вы хотите использовать язык, отличный от C, для работы с Notcurses,
+доступны многочисленные обёртки. Некоторые включены в этот репозиторий, а другие являются внешними.
 
-| Language | Lead(s)                       | Repository |
-| -------- | ----------------------------- | ---------- |
+| Язык     | Лидер(ы)                      | Репозиторий   |
+| -------- | ----------------------------- | ------------- |
 | Ada      | Jeremy Grosser                | [JeremyGrosser/notcursesada](https://github.com/JeremyGrosser/notcursesada) |
-| C++      | Marek Habersack, nick black   | internal   |
+| C++      | Marek Habersack, nick black   | внутренний    |
 | Dart     | Nelson Fernandez              | [kascote/dart_notcurses](https://github.com/kascote/dart_notcurses) |
 | Julia    | Dheepak Krishnamurthy         | [kdheepak/Notcurses.jl](https://github.com/kdheepak/Notcurses.jl) |
 | Nim      | Michael S. Bradley, Jr.       | [michaelsbradleyjr/nim-notcurses](https://github.com/michaelsbradleyjr/nim-notcurses) |
-| Python   | nick black                    | internal   |
-| Python   | igo95862                      | internal   |
+| Python   | nick black                    | внутренний    |
+| Python   | igo95862                      | внутренний    |
 | Rust     | José Luis Cruz                | [dankamongmen/libnotcurses-sys](https://github.com/dankamongmen/libnotcurses-sys) |
 | Zig      | Jakub Dundalek                | [dundalek/notcurses-zig-example](https://github.com/dundalek/notcurses-zig-example) |
 
-## Included tools
+## Включённые инструменты
 
-Nine executables are installed as part of Notcurses:
-* `ncls`: an `ls` that displays multimedia in the terminal
+В составе Notcurses устанавливаются девять исполняемых файлов:
+* `ncls`: аналог `ls`, отображающий мультимедиа в терминале
 * `ncneofetch`: a [neofetch](https://github.com/dylanaraps/neofetch) ripoff
-* `ncplayer`: renders visual media (images/videos)
-* `nctetris`: a tetris clone
-* `notcurses-demo`: some demonstration code
-* `notcurses-info`: detect and print terminal capabilities/diagnostics
-* `notcurses-input`: decode and print keypresses
-* `notcurses-tester`: unit testing
-* `tfman`: a swank manual browser
+* `ncplayer`: рендеры визуального медиа (изображения/видео)
+* `nctetris`: клон тетриса
+* `notcurses-demo`: некоторый демонстрационный код
+* `notcurses-info`: определение и вывод возможностей терминала/диагностика
+* `notcurses-input`: декодирования и вывод нажатий клавиш
+* `notcurses-tester`: модульное тестирование
+* `tfman`: шикарный мануальный браузер/просмотрщик руководств
 
 To run `notcurses-demo` from a checkout, provide the `data` directory via
 the `-p` argument. Demos requiring data files will otherwise abort. The base
@@ -167,11 +165,10 @@ values greater than 1 will slow it down.
 `notcurses-tester` likewise requires that `data`, populated with the necessary
 data files, be specified with `-p`. It can be run by itself, or via `make test`.
 
-## Documentation
+## Документация
 
-With `-DUSE_PANDOC=on` (the default), a full set of man pages and XHTML
-will be built from `doc/man`. The following Markdown documentation is included
-directly:
+С `-DUSE_PANDOC=on` (стоит по умолчанию) будет создан полный набор man-страниц и XHTML из `doc/man`.
+Следующая документация в формате Markdown включена напрямую:
 
 * Per-release [News](NEWS.md) for packagers, developers, and users.
 * The `TERM` environment variable and [various terminal emulators](TERMINALS.md).
@@ -602,16 +599,16 @@ If things break or seem otherwise lackluster, **please** consult the
   comments and appreciative tone are why I work on Free Software.
 </details>
 
-## Useful links
+## Полезные ссылки
 
 * [BiDi in Terminal Emulators](https://terminal-wg.pages.freedesktop.org/bidi/)
-* [The Xterm FAQ](https://invisible-island.net/xterm/xterm.faq.html)
+* [ЧаВо Xterm](https://invisible-island.net/xterm/xterm.faq.html)
   * [XTerm Control Sequences](https://invisible-island.net/xterm/ctlseqs/ctlseqs.pdf)
-* [The NCURSES FAQ](https://invisible-island.net/ncurses/ncurses.faq.html)
+* [ЧаВо NCURSES](https://invisible-island.net/ncurses/ncurses.faq.html)
 * [ECMA-35 Character Code Structure and Extension Techniques](https://www.ecma-international.org/publications/standards/Ecma-035.htm) (ISO/IEC 2022)
 * [ECMA-43 8-bit Coded Character Set Structure and Rules](https://www.ecma-international.org/publications/standards/Ecma-043.htm)
 * [ECMA-48 Control Functions for Coded Character Sets](https://www.ecma-international.org/publications/standards/Ecma-048.htm) (ISO/IEC 6429)
-* [Unicode 14.0 Full Emoji List](https://unicode.org/emoji/charts/full-emoji-list.html)
+* [Весь список эмодзи Unicode 14.0](https://unicode.org/emoji/charts/full-emoji-list.html)
 * [Unicode Standard Annex #29 Text Segmentation](http://www.unicode.org/reports/tr29)
 * [Unicode Standard Annex #15 Normalization Forms](https://unicode.org/reports/tr15/)
 * [mintty tips](https://github.com/mintty/mintty/wiki/Tips)
@@ -622,10 +619,10 @@ If things break or seem otherwise lackluster, **please** consult the
 * [Glyph Hell: An introduction to glyphs, as used and defined in the FreeType engine](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
 * [Text Rendering Hates You](https://gankra.github.io/blah/text-hates-you/)
 * [Use the UTF-8 code page](https://docs.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page)
-* My wiki's [Sixel page](https://nick-black.com/dankwiki/index.php?title=Sixel) and Kitty's [extensions](https://sw.kovidgoyal.net/kitty/protocol-extensions.html).
-* Linux man pages: [console_codes(4)](http://man7.org/linux/man-pages/man4/console_codes.4.html), [termios(3)](http://man7.org/linux/man-pages/man3/termios.3.html), [ioctl_tty(2)](http://man7.org/linux/man-pages/man2/ioctl_tty.2.html), [ioctl_console(2)](http://man7.org/linux/man-pages/man2/ioctl_console.2.html)
-* The Microsoft Windows [Console Reference](https://docs.microsoft.com/en-us/windows/console/console-reference)
-* NCURSES man pages: [terminfo(5)](http://man7.org/linux/man-pages/man5/terminfo.5.html), [user_caps(5)](http://man7.org/linux/man-pages/man5/user_caps.5.html)
+* [Sixel страница](https://nick-black.com/dankwiki/index.php?title=Sixel) моей вики и Kitty's [расширения](https://sw.kovidgoyal.net/kitty/protocol-extensions.html).
+* Linux man-страницы: [console_codes(4)](http://man7.org/linux/man-pages/man4/console_codes.4.html), [termios(3)](http://man7.org/linux/man-pages/man3/termios.3.html), [ioctl_tty(2)](http://man7.org/linux/man-pages/man2/ioctl_tty.2.html), [ioctl_console(2)](http://man7.org/linux/man-pages/man2/ioctl_console.2.html)
+* Microsoft Windows [Console Reference](https://docs.microsoft.com/en-us/windows/console/console-reference)
+* NCURSES man-страницы: [terminfo(5)](http://man7.org/linux/man-pages/man5/terminfo.5.html), [user_caps(5)](http://man7.org/linux/man-pages/man5/user_caps.5.html)
 
 > “Our fine arts were developed, their types and uses were established, in times
 very different from the present, by men whose power of action upon things was
