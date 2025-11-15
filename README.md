@@ -22,7 +22,7 @@
 </p>
 
 для большей информации смотрите [dankwiki](https://nick-black.com/dankwiki/index.php/Notcurses)
-и [man страницы](https://notcurses.com). кроме того, есть
+и [man-страницы](https://notcurses.com). кроме того, есть
 [Doxygen](https://notcurses.com/html/) вывод.
 Я написал связное [руководство](https://nick-black.com/htp-notcurses.pdf), которое доступно для бесплатного скачивания (или для [покупки в бумажном варианте](https://amazon.com/dp/B086PNVNC9)).
 
@@ -80,7 +80,7 @@ Notcurses открывает расширенные возможности дл�
   Это облегчает оптимизацию компилятором и сокращает время загрузки. Notcurses можно скомпилировать без
   мультимедийного функционала, что требует значительно меньшего набора зависимостей.
 
-* Все APIs изначально поддерживают Универсальный набор символов (Unicode / Юникод). API `nccell`
+* Все API изначально поддерживают Универсальный набор символов (Unicode / Юникод). API `nccell`
   основан на концепции [Расширенных графемных кластеров](https://unicode.org/reports/tr29/) Юникода.
 
 * Визуальные преимущества, включая изображения, шрифты, видео, высококонтрастный текст, спрайты
@@ -134,12 +134,12 @@ Notcurses открывает расширенные возможности дл�
 | Язык     | Лидер(ы)                      | Репозиторий   |
 | -------- | ----------------------------- | ------------- |
 | Ada      | Jeremy Grosser                | [JeremyGrosser/notcursesada](https://github.com/JeremyGrosser/notcursesada) |
-| C++      | Marek Habersack, nick black   | внутренний    |
+| C++      | Marek Habersack, nick black   | уже внутри    |
 | Dart     | Nelson Fernandez              | [kascote/dart_notcurses](https://github.com/kascote/dart_notcurses) |
 | Julia    | Dheepak Krishnamurthy         | [kdheepak/Notcurses.jl](https://github.com/kdheepak/Notcurses.jl) |
 | Nim      | Michael S. Bradley, Jr.       | [michaelsbradleyjr/nim-notcurses](https://github.com/michaelsbradleyjr/nim-notcurses) |
-| Python   | nick black                    | внутренний    |
-| Python   | igo95862                      | внутренний    |
+| Python   | nick black                    | уже внутри    |
+| Python   | igo95862                      | уже внутри    |
 | Rust     | José Luis Cruz                | [dankamongmen/libnotcurses-sys](https://github.com/dankamongmen/libnotcurses-sys) |
 | Zig      | Jakub Dundalek                | [dundalek/notcurses-zig-example](https://github.com/dundalek/notcurses-zig-example) |
 
@@ -245,7 +245,7 @@ If things break or seem otherwise lackluster, **please** consult the
 `TERM` and `LANG` definitions, and might want `COLORTERM`.
 
 <details>
- <summary>Can I use Notcurses in my closed-source program?</summary>
+ <summary>Могу ли Я использовать Notcurses для своих программ с закрытым исходным кодом?</summary>
  Notcurses is licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache2</a>,
  a demonstration that I have transcended your petty world of material goods,
  fiat currencies, and closed sources. Implement Microsoft Bob in it. Charge
@@ -257,16 +257,16 @@ If things break or seem otherwise lackluster, **please** consult the
 </details>
 
 <details>
-  <summary>Can I write a CLI program (scrolling, fits in with the shell, etc.)
-   with Notcurses?</summary>
-   Yes! Use the <code>NCOPTION_CLI_MODE</code> flag (an alias for several
+  <summary>Могу ли Я написать CLI программу (scrolling, fits in with the shell, etc.)
+   с Notcurses?</summary>
+   Да! Используйте <code>NCOPTION_CLI_MODE</code> флаг (an alias for several
    real flags; see <a href="https://notcurses.com/notcurses_init.3.html"><code>notcurses_init(1)</code></a>
    for more information). You still must explicitly render.
 </details>
 
 <details>
-  <summary>Can I have Notcurses without this huge multimedia stack?</summary>
-  Again yes! Build with <code>-DUSE_MULTIMEDIA=none</code>.
+  <summary>Могу ли я использовать Notcurses без этого огромного мультимедийного стека?</summary>
+  И снова да! Соберите с <code>-DUSE_MULTIMEDIA=none</code>.
 </details>
 
 <details>
@@ -290,7 +290,7 @@ If things break or seem otherwise lackluster, **please** consult the
 </details>
 
 <details>
-  <summary>Do I want ffmpeg or OpenImageIO?</summary>
+  <summary>Мне нужен ffmpeg или OpenImageIO?</summary>
   While OpenImageIO is a superb library for dealing with single-frame images,
   its video support is less than perfect (blame me; I've been promising Larry
   I'd rewrite it for several months), and in any case implemented
@@ -401,8 +401,8 @@ If things break or seem otherwise lackluster, **please** consult the
 </details>
 
 <details>
-  <summary>The name is dumb.</summary>
-  That's not a question?
+  <summary>Название дурацкое.</summary>
+  Это не вопрос?
 </details>
 
 <details>

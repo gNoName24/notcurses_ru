@@ -1,3 +1,5 @@
+// Modified - translated by NoName24, 2025
+
 #ifndef NOTCURSES_NOTCURSES
 #define NOTCURSES_NOTCURSES
 
